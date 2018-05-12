@@ -1,7 +1,5 @@
 package com.sofo.springjwtauth.auth;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sofo.springjwtauth.user.UserModel;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
