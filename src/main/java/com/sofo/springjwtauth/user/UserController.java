@@ -67,11 +67,13 @@ public class UserController {
     /**
      * Logout.
      *
+     * ignored the <code>session_token</code>
+     * because the logout mechanism implemented does not require it.
+     *
      * @param id       the id
-     * @param logoutVO the logout vo
      */
     @PostMapping("/logout/{id}")
-    public void logout(@PathVariable String id, @RequestBody LogoutVO logoutVO) {
-        userService.logout(id, logoutVO);
+    public void logout(@PathVariable String id) {
+        userService.logout(id);
     }
 }

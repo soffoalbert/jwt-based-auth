@@ -76,9 +76,8 @@ public class UserService {
      * Logout.
      *
      * @param id       the id
-     * @param logoutVO the logout vo
      */
-    public void logout(String id, final LogoutVO logoutVO) {
+    public void logout(String id) {
         Optional<UserModel> userModel = userRepository.findById(Long.parseLong(id));
         userModel.get().setHasValidSession(false);
         userRepository.save(userModel.get());
