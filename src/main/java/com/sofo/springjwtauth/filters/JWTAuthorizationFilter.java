@@ -1,6 +1,9 @@
 package com.sofo.springjwtauth.filters;
 
+import com.sofo.springjwtauth.user.UserModel;
+import com.sofo.springjwtauth.user.UserRepository;
 import io.jsonwebtoken.Jwts;
+import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,13 +24,16 @@ import static com.sofo.springjwtauth.auth.SecurityConstants.SECRET;
  */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
+    private UserRepository userRepository;
+
     /**
      * Instantiates a new Jwt authorization filter.
      *
      * @param authenticationManager the authentication manager
      */
-    public JWTAuthorizationFilter(AuthenticationManager authenticationManager) {
+    public JWTAuthorizationFilter(AuthenticationManager authenticationManager, ApplicationContext ctx) {
         super(authenticationManager);
+        this.userRepository = ctx.getBean(UserRepository.class);
     }
 
     @Override
@@ -56,7 +62,9 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                     .getBody()
                     .getSubject();
 
-            if (user != null) {
+            UserModel userModel = userRepository.findByUsername(user);
+
+            if (user != null && userModel.isHasValidSession()) {
                 return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
             }
             return null;

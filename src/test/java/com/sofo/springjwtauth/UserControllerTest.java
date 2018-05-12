@@ -1,7 +1,6 @@
 package com.sofo.springjwtauth;
 
 import com.google.gson.Gson;
-import com.sofo.springjwtauth.auth.LogoutVO;
 import com.sofo.springjwtauth.user.UserController;
 import com.sofo.springjwtauth.user.UserModel;
 import com.sofo.springjwtauth.user.UserRepository;
@@ -109,14 +108,8 @@ public class UserControllerTest {
 
         userRepository.save(userModel);
 
-        LogoutVO logoutVO = new LogoutVO();
-        logoutVO.setToken("test-token");
-
-        Gson gson = new Gson();
-        String logoutVOJson = gson.toJson(logoutVO);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/logout/1")
-                .content(logoutVOJson)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 

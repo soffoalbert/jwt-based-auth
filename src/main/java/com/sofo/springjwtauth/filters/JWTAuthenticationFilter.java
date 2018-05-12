@@ -2,8 +2,6 @@ package com.sofo.springjwtauth.filters;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.sofo.springjwtauth.auth.AuthModel;
-import com.sofo.springjwtauth.auth.AuthRepository;
 import com.sofo.springjwtauth.auth.AuthVO;
 import com.sofo.springjwtauth.user.UserModel;
 import com.sofo.springjwtauth.user.UserRepository;
@@ -36,7 +34,6 @@ import static com.sofo.springjwtauth.auth.SecurityConstants.SECRET;
 @Configurable
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
-    private AuthRepository authRepository;
     private UserRepository userRepository;
 
     /**
@@ -47,7 +44,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
      */
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager, ApplicationContext ctx) {
         this.authenticationManager = authenticationManager;
-        this.authRepository = ctx.getBean(AuthRepository.class);
         this.userRepository = ctx.getBean(UserRepository.class);
     }
 
@@ -85,9 +81,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         userModel.setHasValidSession(true);
         userRepository.save(userModel);
         Gson gson = new Gson();
-        AuthModel authModel = new AuthModel(token, userModel);
-        authRepository.save(authModel);
-        AuthVO authVO = new AuthVO(authModel.getId(),token);
+        AuthVO authVO = new AuthVO(userModel.getId(),token);
         String result = gson.toJson(authVO);
         response.getWriter().write(result);
     }

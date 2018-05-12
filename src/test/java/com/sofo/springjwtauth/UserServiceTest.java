@@ -1,6 +1,5 @@
 package com.sofo.springjwtauth;
 
-import com.sofo.springjwtauth.auth.LogoutVO;
 import com.sofo.springjwtauth.user.UserMapper;
 import com.sofo.springjwtauth.user.UserModel;
 import com.sofo.springjwtauth.user.UserRepository;
@@ -128,12 +127,9 @@ public class UserServiceTest {
 
         Optional<UserModel> userModel1 = Optional.of(userModel);
 
-        LogoutVO logoutVO = new LogoutVO();
-        logoutVO.setToken("test-token");
-
         Mockito.when(userRepository.findById(1L)).thenReturn(userModel1);
 
-        userService.logout("1", logoutVO);
+        userService.logout("1");
 
         Mockito.verify(userRepository).save(userModel);
     }

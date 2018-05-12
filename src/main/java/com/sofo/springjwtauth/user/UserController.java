@@ -1,6 +1,5 @@
 package com.sofo.springjwtauth.user;
 
-import com.sofo.springjwtauth.auth.LogoutVO;
 import java.util.Set;
 import javax.inject.Inject;
 import org.springframework.http.HttpStatus;

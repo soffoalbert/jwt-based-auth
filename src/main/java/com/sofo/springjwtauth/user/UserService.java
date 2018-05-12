@@ -1,6 +1,5 @@
 package com.sofo.springjwtauth.user;
 
-import com.sofo.springjwtauth.auth.LogoutVO;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -75,7 +74,7 @@ public class UserService {
     /**
      * Logout.
      *
-     * @param id       the id
+     * @param id the id
      */
     public void logout(String id) {
         Optional<UserModel> userModel = userRepository.findById(Long.parseLong(id));
