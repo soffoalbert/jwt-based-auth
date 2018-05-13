@@ -1,6 +1,7 @@
 package com.sofo.springjwtauth.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,10 +18,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserVO {
     private long id;
+    @NotNull
     private String phone;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @NotNull
     private String username;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @NotNull
     private String password;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private boolean hasValidSession;
@@ -39,6 +43,4 @@ public class UserVO {
         this.password = password;
         this.phone = phone;
     }
-
-
 }

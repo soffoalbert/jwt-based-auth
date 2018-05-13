@@ -2,6 +2,7 @@ package com.sofo.springjwtauth.user;
 
 import java.util.Set;
 import javax.inject.Inject;
+import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,7 @@ public class UserController {
      * @param user the user
      */
     @PutMapping("/users")
-    public void signUp(@RequestBody UserVO user) {
+    public void signUp(@RequestBody @Valid UserVO user) {
         userService.createUser(user);
     }
 

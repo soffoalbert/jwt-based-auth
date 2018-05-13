@@ -2,6 +2,7 @@ package com.sofo.springjwtauth;
 
 import com.sofo.springjwtauth.user.UserMapper;
 import com.sofo.springjwtauth.user.UserModel;
+import com.sofo.springjwtauth.user.UserNotFoundException;
 import com.sofo.springjwtauth.user.UserRepository;
 import com.sofo.springjwtauth.user.UserService;
 import com.sofo.springjwtauth.user.UserVO;
@@ -57,8 +58,6 @@ public class UserServiceTest {
         Mockito.verify(userRepository).save(userModel);
         Mockito.verify(bCryptPasswordEncoder).encode(userModel.getPassword());
         Mockito.verify(userMapper).toEntity(userVO);
-
-
     }
 
     @Test
@@ -132,5 +131,12 @@ public class UserServiceTest {
         userService.logout("1");
 
         Mockito.verify(userRepository).save(userModel);
+    }
+
+    @Test(expected = UserNotFoundException.class)
+    public void testLogoutWithNonExistingUser() {
+        Mockito.when(userRepository.findById(1L)).thenReturn(Optional.empty());
+        userService.logout("1");
+        Mockito.verify(userRepository).findById(1L);
     }
 }

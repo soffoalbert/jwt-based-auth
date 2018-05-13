@@ -76,8 +76,11 @@ public class UserService {
      *
      * @param id the id
      */
-    public void logout(String id) {
+    public void logout(String id) throws UserNotFoundException {
         Optional<UserModel> userModel = userRepository.findById(Long.parseLong(id));
+        if (!userModel.isPresent()) {
+            throw new UserNotFoundException("The user you are trying to logout does not exist");
+        }
         userModel.get().setHasValidSession(false);
         userRepository.save(userModel.get());
     }

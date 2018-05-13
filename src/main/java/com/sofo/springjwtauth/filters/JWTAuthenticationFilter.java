@@ -31,7 +31,6 @@ import static com.sofo.springjwtauth.auth.SecurityConstants.SECRET;
 /**
  * Created by georges on 5/10/18.
  */
-@Configurable
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
     private UserRepository userRepository;
