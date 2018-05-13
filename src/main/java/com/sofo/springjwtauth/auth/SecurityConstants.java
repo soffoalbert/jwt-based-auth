@@ -11,7 +11,7 @@ public interface SecurityConstants {
     /**
      * The constant EXPIRATION_TIME.
      */
-    long EXPIRATION_TIME = 180000; // MINUTES
+    long EXPIRATION_TIME = 180000; // 3 MINUTES
     /**
      * The constant HEADER_STRING.
      */
