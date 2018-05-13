@@ -96,7 +96,7 @@ public class UserControllerTest {
         Set<UserVO> userVOs = new HashSet<>();
         userVOs.add(userVO);
 
-        Mockito.when(userService.retrieveAllUsers()).thenReturn(userVOs);
+        Mockito.when(userServiceMock.retrieveAllUsers()).thenReturn(userVOs);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/users"))
                 .andExpect(status().isAccepted())
@@ -116,7 +116,7 @@ public class UserControllerTest {
         Set<UserVO> userVOs = new HashSet<>();
         userVOs.add(userVO);
 
-        Mockito.when(userService.retrieveAllActiveUsers()).thenReturn(userVOs);
+        Mockito.when(userServiceMock.retrieveAllActiveUsers()).thenReturn(userVOs);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/active-users"))
                 .andExpect(status().isAccepted())
